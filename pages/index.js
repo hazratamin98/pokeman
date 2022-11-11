@@ -1,18 +1,23 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
+// import PokemanImage from "./signalImage";
 
 export default function Home({ data }) {
-  // let input =
-  //   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png";
-  // let result = input.split("/")[8];
-  const url =
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png";
-  const urlsplit = url.split("/");
-  const id = urlsplit.length - 1;
-  console.log(id, "idddddss");
+  const getImageUrl = (_url) => {
+    const id = getID(_url);
 
-  console.log(data, "alldata");
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+  };
+
+  const getID = (_url) => {
+    const urlsplit = _url.split("/");
+    const id = urlsplit[urlsplit.length - 2];
+    console.log(id, "idsss");
+
+    return id;
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -24,18 +29,13 @@ export default function Home({ data }) {
         <div className={styles.forgrid}>
           {data?.results?.map((item) => {
             return (
-              <div className={styles.card}>
-                {/* {item.url} */}
+              <Link href={`/pokemon/${getID(item.url)}`}>
+                <div className={styles.card}>
+                  <Image src={getImageUrl(item.url)} width={250} height={250} />
 
-                <Image
-                  // src={id}
-                  width={250}
-                  height={250}
-                  onClick={() => alert("show image")}
-                />
-
-                <div className={styles.signal}>{item.name}</div>
-              </div>
+                  <div className={styles.signal}>{item.name}</div>
+                </div>
+              </Link>
             );
           })}
         </div>
