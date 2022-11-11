@@ -17,9 +17,7 @@ const signalImage = ({ data }) => {
         <meta property="og:title" content={data.name} />
         <meta property="og:description" content={data.name} />
         <meta property="og:image" content={data.sprites.front_default} />
-
         <meta property="twitter:card" content="summary_large_image" />
-
         <meta property="twitter:title" content={data.name} />
         <meta property="twitter:description" content={data.name} />
         <meta property="twitter:image" content={data.sprites.front_default} />
